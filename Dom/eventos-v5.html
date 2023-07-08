@@ -1,0 +1,41 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<!--Eventos de Teclado-->
+<div id="app">
+    <p>{{ contador }}</p>
+    <button @click="somar(5, $event)">Somar 1</button>
+    <p @mousemove="atualizarXY">
+        Mouse: {{ x }} e {{ y }}
+        <span @mousemove.stop="">PARAR AQUI!!!</span> <!--Modificador de evento (stop) Para a propagação-->
+    </p>
+    <a @click.prevent href="http://google.com.br">Google</a> <!--Modificador de evento (prevent) previni o comportamento padrão-->
+    <hr>
+    <input type="text" @keyup.enter="exibirAlerta">
+</div>
+
+<script>
+    new Vue ({
+        el: '#app',
+        data: {
+            contador: 0,
+            x: 0,
+            y: 0,
+        },
+        methods: {
+            somar(passo, event) {
+                console.log(passo, event)
+                this.contador += passo
+            },
+            atualizarXY(event) {
+                this.x = event.clientX
+                this.y = event.clientY
+            },
+            exibirAlerta() {
+                alert('Estou te alertando')
+            },
+            //parar(e) {
+               //e.stopPropagation(); 
+            //}
+        },
+    })
+</script>
